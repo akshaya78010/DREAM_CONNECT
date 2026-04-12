@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../config';
 
 export default function DreamWall() {
   const [dreams, setDreams] = useState([]);
@@ -115,7 +116,7 @@ export default function DreamWall() {
               {dream.media && dream.media.length > 0 ? (
                 <div style={{display: 'flex', gap: '0.8rem', overflowX: 'auto', paddingBottom: '0.5rem'}}>
                   {dream.media.map((m, i) => {
-                     const url = m.url.startsWith('http') ? m.url : `http://localhost:3000${m.url}`;
+                     const url = m.url.startsWith('http') ? m.url : `${API_BASE_URL}${m.url}`;
                      if (m.mType === 'video') return <video key={i} src={url} controls muted loop style={{height: '250px', borderRadius: '8px', backgroundColor: '#000'}} />;
                      if (m.mType === 'audio') return <audio key={i} src={url} controls style={{marginTop: '0.5rem'}} />;
                      return <img key={i} src={url} style={{height: '250px', borderRadius: '8px', objectFit: 'cover', backgroundColor: 'rgba(0,0,0,0.2)'}} alt="" />;
@@ -123,9 +124,9 @@ export default function DreamWall() {
                 </div>
               ) : (
                 <>
-                  {dream.mediaType === 'video' && <video src={dream.mediaUrl.startsWith('http') ? dream.mediaUrl : `http://localhost:3000${dream.mediaUrl}`} controls autoPlay muted loop style={{width: '100%', borderRadius: '8px', maxHeight: '500px', backgroundColor: '#000'}} />}
-                  {dream.mediaType === 'audio' && <audio src={dream.mediaUrl.startsWith('http') ? dream.mediaUrl : `http://localhost:3000${dream.mediaUrl}`} controls style={{width: '100%'}} />}
-                  {dream.mediaType === 'image' && <img src={dream.mediaUrl.startsWith('http') ? dream.mediaUrl : `http://localhost:3000${dream.mediaUrl}`} alt="Dream media" style={{width: '100%', borderRadius: '8px', maxHeight: '500px', objectFit: 'contain', backgroundColor: 'rgba(0,0,0,0.2)'}} />}
+                  {dream.mediaType === 'video' && <video src={dream.mediaUrl.startsWith('http') ? dream.mediaUrl : `${API_BASE_URL}${dream.mediaUrl}`} controls autoPlay muted loop style={{width: '100%', borderRadius: '8px', maxHeight: '500px', backgroundColor: '#000'}} />}
+                  {dream.mediaType === 'audio' && <audio src={dream.mediaUrl.startsWith('http') ? dream.mediaUrl : `${API_BASE_URL}${dream.mediaUrl}`} controls style={{width: '100%'}} />}
+                  {dream.mediaType === 'image' && <img src={dream.mediaUrl.startsWith('http') ? dream.mediaUrl : `${API_BASE_URL}${dream.mediaUrl}`} alt="Dream media" style={{width: '100%', borderRadius: '8px', maxHeight: '500px', objectFit: 'contain', backgroundColor: 'rgba(0,0,0,0.2)'}} />}
                 </>
               )}
 

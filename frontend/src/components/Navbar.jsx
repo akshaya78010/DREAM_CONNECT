@@ -16,7 +16,7 @@ export default function Navbar() {
     if (val.length > 0) {
       setSearchOpen(true);
       try {
-        const res = await axios.get(`http://localhost:3000/api/users/search?query=${val}`);
+        const res = await axios.get(`/api/users/search?query=${val}`);
         setResults(res.data);
       } catch (err) {
           console.error('Search error:', err);
