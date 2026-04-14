@@ -1,5 +1,5 @@
-import { createContext, useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import { createContext, useState, useEffect, useContext } from "react";
+import axios from "axios";
 
 const AuthContext = createContext();
 
@@ -14,28 +14,30 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const checkUser = async () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
       try {
-        const res = await axios.get('/api/users/profile', { headers: { Authorization: `Bearer ${token}` } });
+        const res = await axios.get("/api/users/profile", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setUser(res.data);
       } catch (err) {
         console.error("Auth validation failed", err);
-        localStorage.removeItem('token');
+        localStorage.removeItem("token");
       }
     }
     setLoading(false);
   };
 
   const login = (token, userData) => {
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", token);
     setUser(userData);
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setUser(null);
-    window.location.href = '/login';
+    window.location.href = "/login";
   };
 
   return (

@@ -1,1 +1,8 @@
-export default function Community() { return <div className="glass" style={{padding: '2rem'}}><h1>Community</h1><p>Welcome to Community</p></div>; }
+export default function Community() {
+  return (
+    <div className="glass" style={{ padding: "2rem" }}>
+      <h1>Community</h1>
+      <p>Welcome to Community</p>
+    </div>
+  );
+}
